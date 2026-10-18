@@ -109,3 +109,11 @@ const componentByNameWithType = wrapper.findComponent<typeof ComponentToFind>({
 expectType<VueWrapper<InstanceType<typeof ComponentToFind>>>(
   componentByNameWithType
 )
+
+// find by type - selector typed as any
+declare const AnyComponent: any
+const componentByAny = wrapper.findComponent(AnyComponent)
+expectType<VueWrapper<any>>(componentByAny)
+expectType<any>(componentByAny.vm)
+expectType<VueWrapper<any>[]>(wrapper.findAllComponents(AnyComponent))
+expectType<Omit<VueWrapper<any>, 'exists'>>(wrapper.getComponent(AnyComponent))
